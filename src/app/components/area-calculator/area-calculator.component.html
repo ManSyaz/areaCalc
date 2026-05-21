@@ -19,28 +19,16 @@
 
       <div class="shape-grid">
         <button
-          *ngFor="let shape of shapes"
-          type="button"
-          class="shape-card"
-          [class.active]="shape.id === selectedShape?.id"
-          (click)="selectShape(shape)">
-          <span class="shape-icon">
-            <ng-container [ngSwitch]="shape.name">
-              <svg *ngSwitchCase="'Rectangle'" viewBox="0 0 64 48" aria-hidden="true">
-                <rect x="8" y="10" width="48" height="28" rx="6" fill="none" stroke="currentColor" stroke-width="4" />
-              </svg>
-              <svg *ngSwitchCase="'Triangle'" viewBox="0 0 64 56" aria-hidden="true">
-                <polygon points="32,8 56,48 8,48" fill="none" stroke="currentColor" stroke-width="4" />
-              </svg>
-              <svg *ngSwitchCase="'Square'" viewBox="0 0 56 56" aria-hidden="true">
-                <rect x="8" y="8" width="40" height="40" rx="6" fill="none" stroke="currentColor" stroke-width="4" />
-              </svg>
-              <svg *ngSwitchCase="'Circle'" viewBox="0 0 56 56" aria-hidden="true">
-                <circle cx="28" cy="28" r="18" fill="none" stroke="currentColor" stroke-width="4" />
-              </svg>
-            </ng-container>
-          </span>
-          <span class="shape-name">{{ shape.name }}</span>
+            *ngFor="let shape of shapes"
+            type="button"
+            class="shape-card"
+            [class.active]="shape.id === selectedShape?.id"
+            (click)="selectShape(shape)">
+            <span class="shape-icon">
+                <svg viewBox="0 0 64 56" aria-hidden="true" [innerHTML]="getShapeIcon(shape.name)">
+                </svg>
+            </span>
+            <span class="shape-name">{{ shape.name }}</span>
         </button>
       </div>
 
@@ -164,4 +152,5 @@
       </div>
     </section>
   </div>
+
 </div>

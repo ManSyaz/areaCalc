@@ -37,6 +37,15 @@ export class AreaService {
     );
   }
 
+  addShape(name: string, formula: string): Observable<Shape> {
+    return this.http.post<Shape>(this.apiUrl, {name, formula}).pipe(
+      map(shape => ({
+        ...shape,
+        fields: this.resolveFields(shape)
+      }))
+    );
+  }
+
   calculateArea(shapeName: string, length: number, height: number, side: number, radius: number): number {
     switch (shapeName.toLowerCase()) {
       case 'rectangle':

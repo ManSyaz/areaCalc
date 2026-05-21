@@ -1,0 +1,50 @@
+<div class="card add-shape-card">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Manage</p>
+      <h2>Add new shape</h2>
+    </div>
+  </div>
+
+  <div class="input-stack">
+
+    <div class="field-row">
+      <div class="field-label">Shape Name</div>
+      <div class="field-input">
+        <input
+          type="text"
+          [(ngModel)]="name"
+          placeholder="e.g. Trapezoid"
+          [disabled]="isSubmitting">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-label">Formula</div>
+      <div class="field-input">
+        <input
+          type="text"
+          [(ngModel)]="formula"
+          placeholder="e.g. (a + b) / 2 * h"
+          [disabled]="isSubmitting">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="alert-success" *ngIf="successMessage">
+    ✅ {{ successMessage }}
+  </div>
+
+  <div class="alert-error" *ngIf="errorMessage">
+    ❌ {{ errorMessage }}
+  </div>
+
+  <button
+    class="submit-btn"
+    (click)="onSubmit()"
+    [disabled]="isSubmitting">
+    {{ isSubmitting ? 'Adding...' : 'Add Shape' }}
+  </button>
+
+</div>

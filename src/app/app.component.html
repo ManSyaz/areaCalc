@@ -1,5 +1,28 @@
-<nav class="navbar navbar-dark bg-dark px-4">
-  <span class="navbar-brand">Area Calculator</span>
+<nav class="app-navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" routerLink="/calculator">
+      <span class="brand-icon">📐</span>
+      <span class="brand-text">Area<strong>Calc</strong></span>
+    </a>
+
+    <div class="navbar-links">
+      <a class="nav-link"
+         routerLink="/calculator"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <span class="nav-icon">⊞</span>
+        Calculator
+      </a>
+      <a class="nav-link nav-link-accent"
+         routerLink="/add-shape"
+         routerLinkActive="active">
+        <span class="nav-icon">＋</span>
+        New Shape
+      </a>
+    </div>
+  </div>
 </nav>
 
-<app-area-calculator></app-area-calculator>
+<div class="page-content">
+  <router-outlet></router-outlet>
+</div>

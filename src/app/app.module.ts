@@ -7,11 +7,15 @@ import { AreaCalculatorComponent } from './components/area-calculator/area-calcu
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AddShapeComponent } from './components/add-shape/add-shape.component';
+
+import { DomSanitizer } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AreaCalculatorComponent
+    AreaCalculatorComponent,
+    AddShapeComponent
   ],
   imports: [
     BrowserModule,
