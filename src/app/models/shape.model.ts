@@ -1,7 +1,5 @@
 export interface Shape{
+    id: number;
     name: string;
-    length: number;
-    height: number;
-    area: number;
-    unit: string;
+    formula: string;
 }

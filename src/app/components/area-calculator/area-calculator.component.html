@@ -1,7 +1,6 @@
 ﻿<div class="container">
   <div class="page-header">
     <div>
-
       <h1>Professional area estimation.</h1>
       <p class="subtitle">Select a shape, enter the dimensions, and see the result instantly.</p>
     </div>
@@ -17,118 +16,63 @@
         <span class="selected-pill">{{ selectedShape?.name }}</span>
       </div>
 
+      <!-- Shape grid -->
       <div class="shape-grid">
         <button
-            *ngFor="let shape of shapes"
-            type="button"
-            class="shape-card"
-            [class.active]="shape.id === selectedShape?.id"
-            (click)="selectShape(shape)">
-            <span class="shape-icon">
-                <svg viewBox="0 0 64 56" aria-hidden="true" [innerHTML]="getShapeIcon(shape.name)">
-                </svg>
-            </span>
-            <span class="shape-name">{{ shape.name }}</span>
+          *ngFor="let shape of shapes"
+          type="button"
+          class="shape-card"
+          [class.active]="shape.id === selectedShape?.id"
+          (click)="selectShape(shape)">
+          <span class="shape-icon">
+            <svg viewBox="0 0 64 56" aria-hidden="true" [innerHTML]="getShapeIcon(shape.name)">
+            </svg>
+          </span>
+          <span class="shape-name">{{ shape.name }}</span>
         </button>
       </div>
 
-      <p class="formula-hint">{{ selectedShape?.formula }}</p>
+      <!-- Formula hint -->
+      <div class="formula-hint" *ngIf="selectedShape">
+        <span class="formula-label">Formula</span>
+        <span class="formula-value">{{ selectedShape.formula }}</span>
+      </div>
 
+      <!-- Dynamic input fields parsed from formula -->
       <div class="input-stack">
-        <div class="field-row" *ngIf="selectedShape && selectedShape.fields.includes('length')">
-          <div class="field-label">Length</div>
-          <div class="field-input">
-            <input
-              type="number"
-              [(ngModel)]="length"
-              (ngModelChange)="updateResult()"
-              min="0"
-              step="0.1"
-              placeholder="0">
-            <div class="unit-pills">
-              <button
-                type="button"
-                *ngFor="let unit of units"
-                class="unit-pill"
-                [class.active]="unit === selectedUnit"
-                (click)="selectedUnit = unit">
-                {{ unit }}
-              </button>
-            </div>
-          </div>
-        </div>
+        <div
+          class="field-row"
+          *ngFor="let field of getFormulaFields(selectedShape?.formula || '')">
 
-        <div class="field-row" *ngIf="selectedShape && selectedShape.fields.includes('height')">
-          <div class="field-label">Height</div>
-          <div class="field-input">
-            <input
-              type="number"
-              [(ngModel)]="height"
-              (ngModelChange)="updateResult()"
-              min="0"
-              step="0.1"
-              placeholder="0">
-            <div class="unit-pills">
-              <button
-                type="button"
-                *ngFor="let unit of units"
-                class="unit-pill"
-                [class.active]="unit === selectedUnit"
-                (click)="selectedUnit = unit">
-                {{ unit }}
-              </button>
-            </div>
-          </div>
-        </div>
+          <div class="field-label">{{ getFieldLabel(field) }}</div>
 
-        <div class="field-row" *ngIf="selectedShape && selectedShape.fields.includes('side')">
-          <div class="field-label">Side</div>
           <div class="field-input">
             <input
               type="number"
-              [(ngModel)]="side"
+              [(ngModel)]="fieldValues[field]"
               (ngModelChange)="updateResult()"
               min="0"
               step="0.1"
               placeholder="0">
-            <div class="unit-pills">
-              <button
-                type="button"
-                *ngFor="let unit of units"
-                class="unit-pill"
-                [class.active]="unit === selectedUnit"
-                (click)="selectedUnit = unit">
-                {{ unit }}
-              </button>
-            </div>
-          </div>
-        </div>
 
-        <div class="field-row" *ngIf="selectedShape && selectedShape.fields.includes('radius')">
-          <div class="field-label">Radius</div>
-          <div class="field-input">
-            <input
-              type="number"
-              [(ngModel)]="radius"
-              (ngModelChange)="updateResult()"
-              min="0"
-              step="0.1"
-              placeholder="0">
             <div class="unit-pills">
               <button
                 type="button"
                 *ngFor="let unit of units"
                 class="unit-pill"
                 [class.active]="unit === selectedUnit"
-                (click)="selectedUnit = unit">
+                (click)="selectedUnit = unit; updateResult()">
                 {{ unit }}
               </button>
             </div>
           </div>
+
         </div>
       </div>
+
     </section>
 
+    <!-- Result panel — unchanged -->
     <section class="card result-panel">
       <div class="result-top">
         <div>
@@ -151,6 +95,6 @@
         </p>
       </div>
     </section>
-  </div>
 
+  </div>
 </div>
